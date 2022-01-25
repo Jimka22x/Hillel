@@ -1,9 +1,12 @@
 package com.unique.pack;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
         digitalClockMirroring();
+        luckyTickets();
     }
 
     private static void digitalClockMirroring() {
@@ -35,4 +38,36 @@ public class Main {
         System.out.println("Количество возможных вариантов c зеркальным отображением чисел времени в сутках: " + count);
         System.out.println("-----------------------------------------------------------------------------------");
     }
+
+    private static void luckyTickets() {
+//        2) Найти количество счастливых билетиков на трамвай от 000001 до 999999
+//        (те у которых сумма первых 3 цифр равна сумме последних 3)
+        System.out.println("Task 1. (luckyTickets)");
+        System.out.print("Укажите какое количество билетов было выпущенно(в диапазоне от 1000 до 999999: ");
+        Scanner scanner = new Scanner(System.in);
+        int releasedTickets = scanner.nextInt();
+        System.out.printf("Среди указанного количества былетов %s счастливых.",
+                calculateLuckyTickets(releasedTickets) - 1);
+    }
+
+    private static int calculateLuckyTickets(int releasedTickets) {
+        int count = 0;
+        for (int i = 0; i <= releasedTickets / 1000; i++) {
+            for (int j = 0; j <= 999; j++) {
+                if (i / 100 + i % 100 / 10 + i % 100 % 10 == j / 100 + j % 100 / 10 + j % 100 % 10) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+//        *) Результат скинуть как ссылка на github, без лишних файлов (out, .idea, project.iml)
+//        где каждое задание отдельным коммитом, и у каждого коммита нормальное сообщение,
+//        которое отображает что в этом коммите добавилось нового.
+//        Т.е. должно быть 3 коммита примерно так:
+//        Initial commit
+//        Task1
+//        Task2
+
 }
